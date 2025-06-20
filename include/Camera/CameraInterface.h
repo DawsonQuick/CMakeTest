@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "./../../IO/IOTypes/IOTypeInterface.h"
+#include "./IO/IOTypes/IOTypeInterface.h"
 
 #include <mutex>
 #include <functional>
