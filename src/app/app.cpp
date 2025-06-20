@@ -8,16 +8,15 @@ m_IO(IOType::GLFW)
 {
     std::cout<<"Starting App"<<std::endl;
 
-    m_Camera = createCameraObject(CameraType::FirstPerson, m_IO.getInterface());
-    m_CameraControls = createCameraControls(CameraType::FirstPerson, m_Camera.get());
+    m_Camera = createCameraObject(CameraType::Orbital, m_IO.getInterface());
+    m_CameraControls = createCameraControls(CameraType::Orbital, m_Camera.get());
     m_CameraControls->bindKeys();
 
+    m_GLFWWindow.pollEvent();
     m_IO.setCameraUpdateCallBack([this](int windWidth, int windHeight, double cursorX, double cursorY){ m_Camera->update(windWidth, windHeight, cursorX, cursorY);});
     while(!m_GLFWWindow.shouldDisplayClose()){
 
         m_Camera->validateCameraInfo();
-
-        
 
         m_GLFWWindow.newFrame();
         m_Gui.render();

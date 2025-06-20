@@ -44,11 +44,15 @@ void GLFWWindow::newFrame() {
 
 void GLFWWindow::render() {
 	glfwSwapBuffers(m_Window);
-	glfwPollEvents();
+	pollEvent();
 };
 void GLFWWindow::shutdown() {
 	glfwTerminate();
 };
+
+void GLFWWindow::pollEvent(){
+	glfwPollEvents();
+}
 
 bool GLFWWindow::shouldDisplayClose() {
 	return glfwWindowShouldClose(m_Window);

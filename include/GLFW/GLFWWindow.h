@@ -16,6 +16,7 @@ public:
 	//Access GLFW window pointer member variable
 	GLFWwindow* getWindowPointer();
 
+	void pollEvent();
 	void newFrame();
 	void render();
 	void shutdown();
