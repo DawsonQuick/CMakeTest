@@ -65,8 +65,18 @@ void FirstPersonCamera::updateCameraVectors() {
     // View matrix
     m_ProposedCameraInfo.view = glm::lookAt(m_ProposedCameraInfo.m_CameraPos, m_ProposedCameraInfo.m_CameraPos + m_ProposedCameraInfo.m_CameraFront, m_ProposedCameraInfo.m_CameraUp);
 
-    // Perspective projection matrix
-    m_ProposedCameraInfo.projection = glm::perspective(glm::radians(m_ProposedCameraInfo.fov), (float)m_WindowWidth / (float)m_WindowHeight, m_ProposedCameraInfo.nearPlane, m_ProposedCameraInfo.farPlane);
+    float aspect = (float)m_WindowWidth / (float)m_WindowHeight;
+    if (m_WindowHeight == 0 || fabs(aspect) < std::numeric_limits<float>::epsilon()) {
+    	// Prevent division by zero or degenerate aspect ratio
+    	aspect = 1.0f; // Fallback to square viewport
+    }
+
+    m_ProposedCameraInfo.projection = glm::perspective(
+    	glm::radians(m_ProposedCameraInfo.fov),
+    	aspect,
+    	m_ProposedCameraInfo.nearPlane,
+    	m_ProposedCameraInfo.farPlane
+    );
 }
 
 void FirstPersonCamera::camera_MoveFoward() {
