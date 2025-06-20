@@ -93,6 +93,16 @@ void OrbitalCamera::updateCameraVectors() {
 	m_ProposedCameraInfo.m_CameraUp = glm::normalize(glm::cross(m_ProposedCameraInfo.m_CameraRight, m_ProposedCameraInfo.m_CameraFront));
 
 	m_ProposedCameraInfo.view = glm::lookAt(position, m_ProposedCameraInfo.centralPoint, m_ProposedCameraInfo.m_CameraUp);
-	m_ProposedCameraInfo.projection = glm::perspective(glm::radians(m_ProposedCameraInfo.fov), (float)m_WindowWidth / (float)m_WindowHeight, m_ProposedCameraInfo.nearPlane, m_ProposedCameraInfo.farPlane);
+	float aspect = (float)m_WindowWidth / (float)m_WindowHeight;
+	if (m_WindowHeight == 0 || fabs(aspect) < std::numeric_limits<float>::epsilon()) {
+    		// Prevent division by zero or degenerate aspect ratio
+    		aspect = 1.0f; // Fallback to square viewport
+	}
 
+	m_ProposedCameraInfo.projection = glm::perspective(
+    		glm::radians(m_ProposedCameraInfo.fov),
+    		aspect,
+    		m_ProposedCameraInfo.nearPlane,
+    		m_ProposedCameraInfo.farPlane
+	);
 }

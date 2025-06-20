@@ -85,7 +85,7 @@ private:
     -size, -size,  size,
 };
 
-    const char* m_VertexShader = R"(#version 450 core
+    const char* m_VertexShader = R"(#version 330 core
                                     layout(location = 0) in vec3 aPos;      
                                     uniform mat4 viewMatrix;
                                     uniform mat4 projectionMatrix;
@@ -95,7 +95,7 @@ private:
                                     };
                                 )";
 
-    const char* m_FragmentShader = R"(  #version 450 core
+    const char* m_FragmentShader = R"(  #version 330 core
                                         out vec4 FragColor;
                                         void main()
                                         {
