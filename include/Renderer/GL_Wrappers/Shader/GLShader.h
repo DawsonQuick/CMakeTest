@@ -8,6 +8,7 @@
 #include <sstream>
 #include <fstream>
 #include <unordered_map>
+#include <glm/glm.hpp>
 
 #include "./../../../Common/Enums.h"
 #include "./../../../Common/Structs.h"
@@ -115,7 +116,7 @@ public:
 	void SetUniform1f(const std::string& name, float v0) {
 		glUniform1f(GetUniformedLocation(name), v0);
 	}
-	//void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) {
-	//	glUniformMatrix4fv(GetUniformedLocation(name), 1, GL_FALSE, &matrix[0][0]);
-	//}
+	void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) {
+		glUniformMatrix4fv(GetUniformedLocation(name), 1, GL_FALSE, &matrix[0][0]);
+	}
 };

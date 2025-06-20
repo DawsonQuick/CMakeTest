@@ -42,6 +42,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glm)
 
+target_include_directories(glm INTERFACE ${glm_SOURCE_DIR})
+
 # Fetch GLEW
 FetchContent_Declare(
   glew

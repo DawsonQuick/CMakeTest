@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
-
+#include <memory>
 #include "Renderer/Renderer.h"
 #include "GLFW/GLFWWindow.h"
+#include "IO/IO.h"
+#include "Camera/CameraFactory.h"
 #include "GUI/GUI.h"
 
 class App {
@@ -10,6 +12,10 @@ class App {
         GLFWWindow m_GLFWWindow;
         GUI m_Gui;
         Renderer m_Renderer;
+        IO m_IO;
+
+        std::unique_ptr<ICamera> m_Camera;
+        std::unique_ptr<ICameraControls> m_CameraControls;
     public:
     //Constuctor
     App();

@@ -2,9 +2,6 @@
 
 //Constructor
 Renderer::Renderer(){
-    m_Proj = glm::perspective(glm::radians(120.0f), (float)2560/ (float)1440, 0.1f, 5000.0f);
-    m_View = glm::translate(glm::mat4(1.0f) , glm::vec3(0, 0, 0));
-
      if (glewInit() != GLEW_OK) {
      std::cerr << "Failed to initialize GLEW" << std::endl;
     }
@@ -20,7 +17,7 @@ Renderer::Renderer(){
     m_Shader = std::make_unique<GLShader>(InitialShaderStageInfo(ShaderStage::VERTEX, m_VertexShader), InitialShaderStageInfo(ShaderStage::FRAGMENT, m_FragmentShader));
 
     m_VAO = std::make_unique<VertexArray>();
-    m_VertexBuffer = std::make_unique<VertexBuffer>(m_square.data(), m_square.size() * sizeof(float));  
+    m_VertexBuffer = std::make_unique<VertexBuffer>(cubeVertices.data(), cubeVertices.size() * sizeof(float));  
 
     VertexBufferLayout layout;
     layout.Push<float>(3); // Position attribute
@@ -33,8 +30,10 @@ Renderer::~Renderer(){
     
 }
 
-void Renderer::render(){
+void Renderer::render(glm::mat4 view, glm::mat4 proj){
     m_Shader->Bind();
+    m_Shader->SetUniformMat4f("viewMatrix", view);
+    m_Shader->SetUniformMat4f("projectionMatrix", proj);
     m_VAO->Bind();
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
