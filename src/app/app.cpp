@@ -4,7 +4,8 @@ App::App():
 m_GLFWWindow(2560,1440),
 m_Gui(m_GLFWWindow.getWindowPointer()),
 m_Renderer(),
-m_IO(IOType::GLFW)
+m_IO(IOType::GLFW),
+m_ParticleEngine()
 {
     std::cout<<"Starting App"<<std::endl;
 
@@ -16,10 +17,11 @@ m_IO(IOType::GLFW)
     m_IO.setCameraUpdateCallBack([this](int windWidth, int windHeight, double cursorX, double cursorY){ m_Camera->update(windWidth, windHeight, cursorX, cursorY);});
     while(!m_GLFWWindow.shouldDisplayClose()){
 
+        
         m_Camera->validateCameraInfo();
-
         m_GLFWWindow.newFrame();
-        m_Gui.render();
+        m_ParticleEngine.stepEngine(0.1f,m_Camera->getActiveCameraInfo());
+        m_Gui.render(m_ParticleEngine.getGuiInformation());
         m_IO.getInterface()->processDisplayUpdate(m_GLFWWindow.getWindowPointer(), 0, false);
         m_Renderer.render(m_Camera->getActiveCameraInfo().view, m_Camera->getActiveCameraInfo().projection);
         m_GLFWWindow.render();

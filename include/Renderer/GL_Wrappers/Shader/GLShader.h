@@ -1,6 +1,5 @@
 #pragma once
-#define GLEW_STATIC
-#include <GL/glew.h>
+#include <Common/GLInclude.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,8 +9,8 @@
 #include <unordered_map>
 #include <glm/glm.hpp>
 
-#include "./../../../Common/Enums.h"
-#include "./../../../Common/Structs.h"
+#include <Common/Enums.h>
+#include <Common/Structs.h>
 //#include <glm/glm.hpp>
 
 class GLShader {

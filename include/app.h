@@ -6,6 +6,7 @@
 #include "IO/IO.h"
 #include "Camera/CameraFactory.h"
 #include "GUI/GUI.h"
+#include "ParticleEngine/ParticleEngine.h"
 
 class App {
     private:
@@ -13,6 +14,7 @@ class App {
         GUI m_Gui;
         Renderer m_Renderer;
         IO m_IO;
+        ParticleEngine m_ParticleEngine;
 
         std::unique_ptr<ICamera> m_Camera;
         std::unique_ptr<ICameraControls> m_CameraControls;

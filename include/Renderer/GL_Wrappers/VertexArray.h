@@ -29,6 +29,7 @@ public:
 		}
 	}
 
+
 	void AddMatrixLayout(const VertexBuffer& vb, const VertexBufferLayout& layout) {
 		Bind();
 		vb.Bind();

@@ -1,6 +1,13 @@
 #pragma once
 #include "VertexBufferLayout.h"
 
+
+enum BufferType {
+	STATIC,
+	DYNAMIC,
+	STREAM
+};
+
 class VertexBuffer
 {
 private:
@@ -10,10 +17,21 @@ public:
 
 	}
 
-	VertexBuffer(const void* data, unsigned int size) {
+	VertexBuffer(const void* data, unsigned int size, BufferType type) {
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+
+		switch (type) {
+			case STATIC:
+				glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+				break;
+			case DYNAMIC:
+				glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW);
+				break;
+			default:
+				glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+		}
+		
 	}
 	~VertexBuffer() {
 	}

@@ -1,8 +1,104 @@
 #pragma once
 #include <functional>
 #include <string>
+#include <Common/GLInclude.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "Enums.h"
+
+
+struct ParticleToGUITransfer {
+	//TODO 
+	//Add list of Available emitters
+	//Add functional callback to create an emitter if GUI is selected
+	private:
+		std::vector<std::string> m_EmitterNames;
+		std::function<void(std::string)> m_AddEmitterCallback;
+	public:
+
+	    //Default Constructor
+		ParticleToGUITransfer(){
+
+		}
+
+		//Constructor
+		ParticleToGUITransfer(std::vector<std::string> emitterNames, std::function<void(std::string)> addEmitterCallback){
+			this->m_EmitterNames = emitterNames;
+			this->m_AddEmitterCallback = addEmitterCallback;
+		}
+
+		std::vector<std::string> getEmitterNames(){
+			return this->m_EmitterNames;
+		}
+
+		void createEmitter(std::string name){
+			m_AddEmitterCallback(name);
+		}
+};
+
+struct ITransformProvider {
+    virtual glm::vec3 getWorldPosition() const = 0;
+    virtual glm::quat getWorldRotation() const = 0;   // or a mat4 if you prefer
+    virtual ~ITransformProvider() = default;
+};
+
+struct Particle {
+private:
+	
+	glm::vec3 position;
+	glm::vec3 velocity;
+	glm::vec3 acceleration;
+	float lifetime;
+
+public:
+
+	//Default Constructor
+	Particle(){
+
+	}
+
+	//Constructor
+	Particle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float lifetime){
+		this->position = pos;
+		this->velocity = vel;
+		this->acceleration = acc;
+		this->lifetime = lifetime;
+	}
+
+	void setPosition(glm::vec3 newPosition){
+		this->position = newPosition;
+	}
+
+	void setVelocity(glm::vec3 newVelocity){
+		this->velocity = newVelocity;
+	}
+
+	void setAcceleration(glm::vec3 newAccleration){
+		this->acceleration = newAccleration;
+	}
+
+	void setLifetime(float newLifetime){
+		this->lifetime = newLifetime;
+	}
+
+	glm::vec3& getPosition(){
+		return this->position;
+	}
+
+	glm::vec3& getVelocity(){
+		return this->velocity;
+	}
+
+	glm::vec3& getAcceleration(){
+		return this->acceleration;
+	}
+
+	float& getLifeTime(){
+		return this->lifetime;
+	}
+};
+
 
 struct InitialShaderStageInfo {
 private:

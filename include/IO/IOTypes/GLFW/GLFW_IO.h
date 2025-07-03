@@ -1,5 +1,5 @@
 #pragma once
-#include <GLFW/glfw3.h>
+#include <Common/GLInclude.h>
 #include <iostream>
 #include "./../IOTypeInterface.h"
 

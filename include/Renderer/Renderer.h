@@ -1,8 +1,4 @@
-#define GLEW_STATIC
-#include <GL/glew.h>
-
-#include <glm/gtc/matrix_transform.hpp>
-
+#include <Common/GLInclude.h>
 #include "Common/Enums.h"
 #include "Common/Structs.h"
 #include "GL_Wrappers/Shader/GLShader.h"
@@ -10,7 +6,7 @@
 #include "GL_Wrappers/VertexArray.h"
 #include "GL_Wrappers/VertexBuffer.h"
 #include "GL_Wrappers/VertexBufferLayout.h"
-
+#include <glm/gtc/matrix_transform.hpp>
 class Renderer {
 public:
 
